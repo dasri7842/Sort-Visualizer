@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Sorting</title>
+</head>
+<body>
+   <div class="head">
+      <h1> <span style="color: orangered;">SORT</span>ING VISUALIZER</h1>
+   </div>
+   <div class="body">
+      <div id="array-setting">
+         <div class="setting">
+            <button class="input" style="font-size: larger;" id="new-array">New Array</button> <br> <br> <hr>
+         </div>
+         <div class="setting">
+            <h2>Size of Array</h2>
+            <input class="input" type="range" min="10" max="400" value="20" id="size-array"> <br> <br> <hr>
+         </div>
+         <div class="setting">
+            <h2>Speed of Animation</h2>
+            <input class="input" type="range" min="0" max="5" value="2" step="1" id="speed"> <br> <br> <hr>
+         </div>
+         <div class="setting">
+            <h2>Select Algo</h2>
+            <select id="algo" class="input">
+               <option value="merge">Merge</option>
+               <option value="quick">Quick</option>
+               <option value="heap">Heap</option>
+               <option value="bubble">Bubble</option>
+               <option value="selection">Selection</option>
+               <option value="insertion">Insertion</option>
+               <option value="count">Count</option>              
+            </select> <br> <br> <hr>
+         </div>
+         <div class="setting" >
+            <button class="input" style="font-size: larger;" id="run-button">Run Algorithmn</button>
+         </div>
+      </div>
+      <div id="array-space">
+
+      </div>
+   </div>
+   <script src="main.js"></script>
+   <script src="./sort_algorithms/Merge.js"></script>
+   <script src="./sort_algorithms/Quick.js"></script>
+   <script src="./sort_algorithms/Heap.js"></script>
+   <script src="./sort_algorithms/Bubble.js"></script>
+   <script src="./sort_algorithms/Insertion.js"></script>
+   <script src="./sort_algorithms/Selection.js"></script>
+   <script src="./sort_algorithms/Count.js"></script>
+</body>
+</html>

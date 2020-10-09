@@ -1,53 +1,17 @@
-*{
-   margin: 0;
-   padding: 0;
-   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+label{
+   color: white;
 }
-.head{
-   background-color: #000000;
-   color: whitesmoke;
-   text-align: center;
-   font-size: larger;
-   padding: 20px;
+li{
+   padding-top: 15px;
+   margin-left: 20px;
+   margin-right: 20px;
 }
-.body{
-   text-align: center;
-   display: flex;
-}
-#array-setting{
-   overflow: hidden;
-   padding-top: 10px;
-   width: 20%;
-   height: 650px;
-   background-color:rgb(32, 9, 9);
-   color: whitesmoke;
-   font-size: larger;
+
+body{
+   background-color: rgb(63, 70, 70);
 }
 #array-space{
-   background-color: rgb(30, 36, 36);
-   width: 80%;
+   width: 100%;
    padding: 20px;
    display: flex;
-}
-.setting{
-   padding: 5px;
-   margin: 20px;
-}
-select{
-   margin: 10px;
-   font-size: larger;
-}
-#run-button{
-   color: whitesmoke;
-   padding: 10px;
-   border-radius: 10px;
-   background-color: green;
-   margin: 0;
-}
-#new-array{
-   color: whitesmoke;
-   padding: 10px;
-   border-radius: 10px;
-   background-color: rgb(142, 167, 54);
-   margin: 0;
 }

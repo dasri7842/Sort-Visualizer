@@ -3,16 +3,25 @@ const generate_new=document.getElementById("new-array"); // generate button.
 const array_size=document.getElementById("size-array"); // desired array size.
 const space=document.getElementById("array-space"); // space for the bars.
 const run_algo=document.getElementById("run-button"); // run algorithm button.
+const skip=document.getElementById("skip-button"); // Abort algorithm button.
 const selected_algo=document.getElementById("algo"); // selected option.
 const req_speed=document.getElementById("speed"); // speed required for every swap.
 
 
-// Variables needed for sorting and Visualizer.
+// DOM things for run-time details
+const Asize=document.getElementById("Asize");
+const Aspeed=document.getElementById("Aspeed");
+
+// Global Variables needed for sorting and Visualizer.
 const bar_len=[]; // array elements height.
 const bar_div=[]; // corresponding div.
+const setting=[generate_new, array_size, run_algo, selected_algo, req_speed];
 var total_size=array_size.value;  // array size.
 var delay=10; // required speed .
 var totdelay=0; //total current delay required to animate a div element(bar). 
+var cleartimeout; //skip button functionality
+
+
 
 
 // event Listener.
@@ -22,25 +31,51 @@ req_speed.addEventListener("input",change_speed);
 run_algo.addEventListener("click",runalgo);
 window.onload=generate_new_array;
 
+function generate_new_array(){
+   space.innerHTML="";
+   total_size=array_size.value;
+   Asize.innerHTML="Size ("+total_size+")";
+   change_speed();
+   for(let i=0;i<total_size;i++){
+      bar_len[i] = Math.floor(Math.random()*590+5);
+      bar_div[i] = document.createElement("div");
+      space.appendChild(bar_div[i]);
+      apply_style(bar_div[i],"skyblue",bar_len[i]);
+   }
+}
 
-
+function change_speed(){
+   Aspeed.innerHTML="Animation (" + Math.pow(2,parseInt(req_speed.value)) + "X)";
+   delay=20000/(total_size*Math.pow(2,parseInt(req_speed.value)));
+}
 // changes the color or height of the div element with some time out.
-update_bar = (element,color,height) => window.setTimeout(()=>{
-   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px;"
-},totdelay+=delay);
-
+function update_bar (element,color,height) {
+   cleartimeout=setTimeout(()=>{
+      element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px;"
+   },totdelay+=delay);
+}
 
 // changes the color or height of the div element.
 apply_style = (element,color,height) => element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px;"
 
-
+skip.addEventListener("click",()=>{
+   // clearTimeout(cleartimeout); Not working.
+   location.reload();
+});
 // speed of animation by changing delay inversely
-function change_speed(){
-   delay=20000/(total_size*Math.pow(2,parseInt(req_speed.value)));
-}
 
 function disable(){
-   
+   for(let i=0;i<5;i++){
+      setting[i].style="opacity: 0.3;pointer-events: none;";
+   }   
+}
+
+function enable(){
+   window.setTimeout(function(){
+      for(let i=0;i<5;i++){
+         setting[i].style="opacity: 1;pointer-events: all;";
+      }  
+   },totdelay+=delay);  
 }
 
 // swap utility function . makes red before swap .
@@ -78,17 +113,6 @@ function runalgo(){
          Count();
          break;
    }
-   // enable;
+   enable();
 }
 
-function generate_new_array(){
-   space.innerHTML="";
-   total_size=array_size.value;
-   change_speed();
-   for(let i=0;i<total_size;i++){
-      bar_len[i] = Math.floor(Math.random()*600+5);
-      bar_div[i] = document.createElement("div");
-      space.appendChild(bar_div[i]);
-      apply_style(bar_div[i],"skyblue",bar_len[i]);
-   }
-}

@@ -1,55 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="style.css">
-   <title>Sorting</title>
-</head>
-<body>
-   <div class="head">
-      <h1> <span style="color: orangered;">SORT</span>ING VISUALIZER</h1>
-   </div>
-   <div class="body">
-      <div id="array-setting">
-         <div class="setting">
-            <button class="input" style="font-size: larger;" id="new-array">New Array</button> <br> <br> <hr>
-         </div>
-         <div class="setting">
-            <h2>Size of Array</h2>
-            <input class="input" type="range" min="10" max="400" value="20" id="size-array"> <br> <br> <hr>
-         </div>
-         <div class="setting">
-            <h2>Speed of Animation</h2>
-            <input class="input" type="range" min="0" max="5" value="2" step="1" id="speed"> <br> <br> <hr>
-         </div>
-         <div class="setting">
-            <h2>Select Algo</h2>
-            <select id="algo" class="input">
-               <option value="merge">Merge</option>
-               <option value="quick">Quick</option>
-               <option value="heap">Heap</option>
-               <option value="bubble">Bubble</option>
-               <option value="selection">Selection</option>
-               <option value="insertion">Insertion</option>
-               <option value="count">Count</option>              
-            </select> <br> <br> <hr>
-         </div>
-         <div class="setting" >
-            <button class="input" style="font-size: larger;" id="run-button">Run Algorithmn</button>
-         </div>
-      </div>
-      <div id="array-space">
+  <head>
+    <title>Sorting Visualizer</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <h1 class="navbar-brand"> <span style="color: coral;">SORT</span>ING VISUALIZER</h1>
+
+
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-md-inline-flex">
+
+            <li class="nav-item">
+               <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit" id="new-array"> <i class="fa fa-refresh" aria-hidden="true"></i> NEW ARRAY</button>
+            </li>
+
+            <li class="nav-item">
+               <div class="form-group">
+                  <label for="formControlRange" id="Asize">Size</label>
+                  <input type="range" class="form-control-range input" min="10" max="300" value="20" id="size-array">
+               </div>
+            </li>
+
+
+            <li class="nav-item">
+               <div class="form-group">
+                  <label for="formControlRange" id="Aspeed">Animation</label>
+                  <input type="range" min="0" max="5" value="2" step="1" class="form-control-range" id="speed">
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+               <select class="custom-select" id="algo">
+                  <option value="merge">Merge Sort</option>
+                  <option value="quick">Quick Sort</option>
+                  <option value="heap">Heap Sort</option>
+                  <option value="bubble">Bubble Sort</option>
+                  <option value="selection">Selection Sort</option>
+                  <option value="insertion">Insertion Sort</option>
+                  <option value="count">Count Sort</option>
+                </select>
+            </li>
+         </ul>
+         <button class="btn btn-outline-success my-5 my-md-0" type="submit" id="run-button"><i class="fa fa-play" aria-hidden="true"> </i>  RUN ALGO!</button>
+         <button class="btn btn-outline-warning my-5 my-md-0" type="submit" id="skip-button" style="margin-left: 15px;"><i class="fa fa-fast-forward" aria-hidden="true"> </i>  SKIP!</button>
 
       </div>
-   </div>
-   <script src="main.js"></script>
-   <script src="./sort_algorithms/Merge.js"></script>
-   <script src="./sort_algorithms/Quick.js"></script>
-   <script src="./sort_algorithms/Heap.js"></script>
-   <script src="./sort_algorithms/Bubble.js"></script>
-   <script src="./sort_algorithms/Insertion.js"></script>
-   <script src="./sort_algorithms/Selection.js"></script>
-   <script src="./sort_algorithms/Count.js"></script>
-</body>
+   </nav>
+   <div id="array-space">
+   
+   </div> 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+    <script src="./sort_algorithms/Merge.js"></script>
+    <script src="./sort_algorithms/Quick.js"></script>
+    <script src="./sort_algorithms/Heap.js"></script>
+    <script src="./sort_algorithms/Bubble.js"></script>
+    <script src="./sort_algorithms/Insertion.js"></script>
+    <script src="./sort_algorithms/Selection.js"></script>
+    <script src="./sort_algorithms/Count.js"></script>
+  </body>
 </html>

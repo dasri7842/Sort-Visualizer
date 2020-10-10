@@ -1,3 +1,10 @@
+/*
+*  Author @Dasari srinivas
+*  Email : dasarisrinivas7842@gmail.com
+*/
+
+
+
 // DOM things.
 const generate_new=document.getElementById("new-array"); // generate button.
 const array_size=document.getElementById("size-array"); // desired array size.
@@ -31,13 +38,17 @@ req_speed.addEventListener("input",change_speed);
 run_algo.addEventListener("click",runalgo);
 window.onload=generate_new_array;
 
+$(document).ready(function() {
+   // opens the nav list as default.
+   if(window.innerWidth<992) $('.navbar-collapse').collapse('show'); 
+});
 function generate_new_array(){
    space.innerHTML="";
    total_size=array_size.value;
    Asize.innerHTML="Size ("+total_size+")";
    change_speed();
    for(let i=0;i<total_size;i++){
-      bar_len[i] = Math.floor(Math.random()*590+5);
+      bar_len[i] = Math.floor(Math.random()*560+20);
       bar_div[i] = document.createElement("div");
       space.appendChild(bar_div[i]);
       apply_style(bar_div[i],"skyblue",bar_len[i]);
@@ -51,12 +62,17 @@ function change_speed(){
 // changes the color or height of the div element with some time out.
 function update_bar (element,color,height) {
    cleartimeout=setTimeout(()=>{
-      element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px;"
+      if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center";
    },totdelay+=delay);
 }
 
+// style=color: black; text-align: center; text-overflow: ellipsis;
 // changes the color or height of the div element.
-apply_style = (element,color,height) => element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px;"
+function apply_style(element,color,height) {
+   if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center";
+}
 
 skip.addEventListener("click",()=>{
    // clearTimeout(cleartimeout); Not working.
@@ -68,6 +84,7 @@ function disable(){
    for(let i=0;i<5;i++){
       setting[i].style="opacity: 0.3;pointer-events: none;";
    }   
+   $('.navbar-collapse').collapse('hide'); 
 }
 
 function enable(){
@@ -75,6 +92,7 @@ function enable(){
       for(let i=0;i<5;i++){
          setting[i].style="opacity: 1;pointer-events: all;";
       }  
+      if(window.innerWidth<992) $('.navbar-collapse').collapse('show'); 
    },totdelay+=delay);  
 }
 
@@ -90,6 +108,9 @@ function swap(id1, id2, col1, col2){
 function runalgo(){
    totdelay=0;
    disable();
+   // var canSee = $("#collapsibleNavId").is(":visible");
+   // alert(canSee);
+   // $('.navbar-toggler').click();
    switch (selected_algo.value) {
       case "bubble" : 
          Bubble();

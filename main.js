@@ -41,6 +41,7 @@ window.onload=generate_new_array;
 $(document).ready(function() {
    // opens the nav list as default.
    if(window.innerWidth<992) $('.navbar-collapse').collapse('show'); 
+   if(window.innerWidth<400) $('#logo').hide();
 });
 function generate_new_array(){
    space.innerHTML="";

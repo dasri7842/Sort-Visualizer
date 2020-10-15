@@ -64,7 +64,7 @@ function change_speed(){
 function update_bar (element,color,height) {
    cleartimeout=setTimeout(()=>{
       if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
-   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;";
    },totdelay+=delay);
 }
 
@@ -72,7 +72,7 @@ function update_bar (element,color,height) {
 // changes the color or height of the div element.
 function apply_style(element,color,height) {
    if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
-   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;";
 }
 
 skip.addEventListener("click",()=>{

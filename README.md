@@ -1,1 +1,1 @@
-# Sorting-Visualizer by Dasari Srinivas
+# Sorting-Visualizer 

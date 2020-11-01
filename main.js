@@ -1,7 +1,7 @@
 /*
 *  Author @Dasari srinivas
 *  Email : dasarisrinivas7842@gmail.com
-*/
+*/ 
 
 
 
@@ -19,10 +19,85 @@ const req_speed=document.getElementById("speed"); // speed required for every sw
 const Asize=document.getElementById("Asize");
 const Aspeed=document.getElementById("Aspeed");
 
+// DOM things for Bootsrap modal (Pop-up for custom array).
+const modal_save = document.getElementById("modal-save");
+const modal_text = document.getElementById("modal-text");
+const modal_size = document.getElementById("modal-size");
+const text_error_text = document.getElementById("text-error");
+const size_error_text = document.getElementById("size-error");
+const custom_array_btn = document.getElementById("custom-array");
+
+modal_save.addEventListener("click",validate);
+modal_text.addEventListener('input',reset_error);
+modal_size.addEventListener('input',reset_error);
+
+// 111 111 111 111 111 111 111 111 111 111 111 111 
+var custom_size,custom_array,is_valid=0;
+function validate(){
+   if(size_error() && text_error()){
+      $('#exampleModalCenter').modal('hide');
+      custom_array_btn.innerHTML="<i class=\"fa fa-check-circle\" aria-hidden=\"true\"></i> SAVED";
+      custom_array_btn.className="btn btn-success my-2 my-sm-1"
+      array_size.value=custom_size;
+      is_valid=1;
+      generate_new_array();
+      is_valid=0;
+   }
+}
+function text_error(){
+   let str=modal_text.value,err="";
+   if(!str) err=" Please fill this field.";
+   else{
+      let temp = str.split(' ');
+      let array = [];
+      for(let i=0;i<temp.length;i++) if(temp[i] && temp[i]!="\n") array.push(temp[i]);
+      // console.log(array);
+      if(array.length != custom_size) err=" Mismatch of Size. Filled Input size is " + array.length;
+      else {
+         for(let i=0;i<custom_size && !err;i++){
+            if(isNaN(array[i])) err=" Array element at Index " + i + " is NaN";
+            array[i]=parseInt(array[i]); if(err) break;
+            if(array[i]<21 || array[i]>500) err = " Array element at Index " + i + " Violates the Range.";
+         }
+      }
+      if(!err) custom_array=array;
+   }
+   if(err){
+      text_error_text.innerHTML="<i class=\"fa fa-exclamation-triangle\"> </i> "+err;
+      modal_text.style.borderColor="red";
+      return false;
+   }
+   return true;
+}
+
+function size_error(){
+   let str=modal_size.value,err="";
+   if(!str) err=" Please fill this field.";
+   else if(isNaN(str)) err=" This is not a Number.";
+   else{
+      let value=parseInt(str);
+      if(value<10 || value>300) err=" Size should be in given Range.";
+      else{
+         custom_size = value;
+         return true;
+      }
+   }
+   if(err){
+      size_error_text.innerHTML="<i class=\"fa fa-exclamation-triangle\"> </i> "+err;
+      modal_size.style.borderColor="red";
+      return false;
+   }
+}
+function reset_error(){
+   size_error_text.innerHTML='';
+   text_error_text.innerHTML='';
+   modal_size.style.borderColor="lightgray";
+   modal_text.style.borderColor="lightgray";
+}
 // Global Variables needed for sorting and Visualizer.
 const bar_len=[]; // array elements height.
 const bar_div=[]; // corresponding div.
-const setting=[generate_new, array_size, run_algo, selected_algo, req_speed];
+const setting=[generate_new, array_size, run_algo, selected_algo, req_speed, custom_array_btn];
 var total_size=array_size.value;  // array size.
 var delay=10; // required speed .
 var totdelay=0; //total current delay required to animate a div element(bar). 
@@ -47,9 +122,13 @@ function generate_new_array(){
    space.innerHTML="";
    total_size=array_size.value;
    Asize.innerHTML="Size ("+total_size+")";
+   if(!is_valid) custom_array_btn.innerHTML="<i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> Custom";
+   if(!is_valid) custom_array_btn.className="btn btn-outline-primary my-2 my-sm-1"
+   // $('.alert').alert('close');
    change_speed();
    for(let i=0;i<total_size;i++){
-      bar_len[i] = Math.floor(Math.random()*560+20);
+      if(is_valid) bar_len[i]=custom_array[i];
+      else bar_len[i] = Math.floor(Math.random()*560+20);
       bar_div[i] = document.createElement("div");
       space.appendChild(bar_div[i]);
       apply_style(bar_div[i],"skyblue",bar_len[i]);
@@ -64,7 +143,7 @@ function change_speed(){
 function update_bar (element,color,height) {
    cleartimeout=setTimeout(()=>{
       if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
-   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;";
    },totdelay+=delay);
 }
 
@@ -72,7 +151,7 @@ function update_bar (element,color,height) {
 // changes the color or height of the div element.
 function apply_style(element,color,height) {
    if(total_size<=13)element.innerHTML= "<small >"+ height + "</small>";
-   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;";
+   element.style=" margin : 0.8px; " + "background-color:" + color + ";"+ "width: 100%;" + "height: " + height + "px; text-align: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;";
 }
 
 skip.addEventListener("click",()=>{
@@ -82,17 +161,23 @@ skip.addEventListener("click",()=>{
 // speed of animation by changing delay inversely
 
 function disable(){
-   for(let i=0;i<5;i++){
-      setting[i].style="opacity: 0.3;pointer-events: none;";
+   // $('.alert').alert('close');
+   setting[2].innerHTML="<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span> Running...";
+   for(let i=0;i<6;i++){
+      setting[i].setAttribute('disabled', true);
+      setting[i].style="cursor: not-allowed;";
    }   
    $('.navbar-collapse').collapse('hide'); 
 }
 
 function enable(){
    window.setTimeout(function(){
-      for(let i=0;i<5;i++){
-         setting[i].style="opacity: 1;pointer-events: all;";
+   setting[2].innerHTML="<i class=\"fa fa-play\" aria-hidden=\"true\"> </i>  RUN ALGO!";
+      for(let i=0;i<6;i++){
+         setting[i].removeAttribute('disabled');
+         setting[i].style="cursor: pointer;";
       }  
+   // $('.alert').alert();
       if(window.innerWidth<992) $('.navbar-collapse').collapse('show'); 
    },totdelay+=delay);  
 }
